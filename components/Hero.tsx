@@ -95,11 +95,11 @@ export const Hero: React.FC<HeroProps> = ({ onStartProject }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-lg sm:text-xl md:text-2xl text-slate-500 max-w-lg font-light"
+            className="text-lg sm:text-xl md:text-2xl text-slate-600 max-w-lg font-light leading-relaxed"
           >
             Elite engineers building high-quality software faster and more efficiently using AI.
             <br />
-            <span className="text-base sm:text-lg md:text-xl">Basic Tech is a modern software development company helping startups and businesses build scalable web, mobile, backend, and AI-powered products.</span>
+            <span className="text-base sm:text-lg md:text-xl font-light">Basic Tech is a modern software development company helping startups and businesses build scalable web, mobile, backend, and AI-powered products.</span>
           </motion.p>
 
           <motion.button

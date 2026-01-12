@@ -45,7 +45,7 @@ export const AISection: React.FC = () => {
       <div className="container mx-auto px-4 sm:px-5 md:px-6 lg:px-8 xl:px-10 2xl:px-12 relative z-10 w-full">
         <div className="max-w-5xl mx-auto text-center">
           <Reveal width="100%">
-            <h2 className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-semibold text-slate-900 mb-12 md:mb-16 leading-tight">
+            <h2 className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-semibold text-slate-900 mb-12 md:mb-16 tracking-tight leading-tight">
               AI is not a feature. <br />
               It's part of our workflow.
             </h2>
@@ -75,10 +75,10 @@ const Feature: React.FC<{ title: string; text: string; delay: number }> = ({
     className="text-center flex flex-col items-center"
   >
     <div className="w-3 h-3 bg-brand-blue rounded-full mb-6 flex-shrink-0" />
-    <h3 className="text-xl md:text-xl lg:text-2xl font-medium text-slate-900 mb-3 md:mb-4">
+    <h3 className="text-xl md:text-xl lg:text-2xl font-semibold text-slate-900 mb-3 md:mb-4 tracking-tight leading-tight">
       {title}
     </h3>
-    <p className="text-base md:text-lg text-slate-500 font-light leading-relaxed max-w-xs mx-auto">
+    <p className="text-base md:text-lg text-slate-600 font-light leading-relaxed max-w-xs mx-auto">
       {text}
     </p>
   </motion.div>

@@ -13,10 +13,10 @@ export const Process: React.FC = () => {
           <div className="lg:w-1/3">
             <div className="sticky top-32">
               <Reveal>
-                <h2 className="text-4xl md:text-5xl font-semibold text-slate-900 mb-6">How We Build</h2>
+                <h2 className="text-4xl md:text-5xl font-semibold text-slate-900 mb-6 tracking-tight leading-tight">How We Build</h2>
               </Reveal>
               <Reveal delay={0.4}>
-                <p className="text-slate-500 text-lg">
+                <p className="text-slate-600 text-lg font-light leading-relaxed">
                   A clear, engineering-led software development process designed for speed, quality, and precision.
                 </p>
               </Reveal>
@@ -64,8 +64,8 @@ const ProcessStepItem: React.FC<{ step: any, index: number }> = ({ step, index }
         <div className="w-[1px] h-full bg-slate-200 group-hover:bg-brand-blue/50 transition-colors duration-500 min-h-[100px]" />
       </div>
       <div className="pb-12">
-        <h3 className="text-2xl font-medium text-slate-900 mb-3">{step.title}</h3>
-        <p className="text-slate-500 leading-relaxed max-w-md">{step.description}</p>
+        <h3 className="text-2xl font-semibold text-slate-900 mb-3 tracking-tight leading-tight">{step.title}</h3>
+        <p className="text-slate-600 font-light leading-relaxed max-w-md text-[15px] sm:text-base">{step.description}</p>
       </div>
     </motion.div>
   );

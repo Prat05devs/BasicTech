@@ -9,7 +9,7 @@ export const Work: React.FC = () => {
     <section className="py-32 bg-slate-50">
       <div className="container mx-auto px-4 sm:px-5 md:px-6 lg:px-8 xl:px-10 2xl:px-12">
         <Reveal>
-          <h2 className="text-sm font-semibold tracking-widest text-slate-400 uppercase mb-16">Selected Work</h2>
+          <h2 className="text-xs sm:text-sm font-semibold tracking-widest text-slate-400 uppercase mb-16 leading-none">Selected Work</h2>
         </Reveal>
 
         <div className="grid grid-cols-1 gap-24">
@@ -62,18 +62,18 @@ const WorkCard: React.FC<{ work: WorkItem, index: number }> = ({ work, index }) 
         {/* Text Side */}
         <div className={`${index % 2 === 1 ? 'md:order-1 md:text-right' : 'md:text-left'}`}>
           <div className={`mb-4 flex flex-col ${index % 2 === 1 ? 'items-end' : 'items-start'}`}>
-              <span className="text-brand-blue font-mono text-xs tracking-wider uppercase bg-blue-50 px-2 py-1 rounded-sm mb-2 inline-block">
+              <span className="text-brand-blue font-mono text-xs tracking-wider uppercase bg-blue-50 px-2 py-1 rounded-sm mb-2 inline-block leading-none">
                   {work.vertical}
               </span>
-              <h3 className="text-3xl md:text-4xl font-semibold text-slate-900">{work.name}</h3>
+              <h3 className="text-3xl md:text-4xl font-semibold text-slate-900 tracking-tight leading-tight">{work.name}</h3>
           </div>
           
-          <p className="text-lg text-slate-500 font-light mb-8 leading-relaxed">
+          <p className="text-base sm:text-lg text-slate-600 font-light mb-8 leading-relaxed">
             {work.solution}
           </p>
 
           <div className={`flex flex-wrap gap-2 ${index % 2 === 1 ? 'justify-end' : ''}`}>
-             {work.tech.split(', ').map((t: string, i: number) => (
+             {work.tech.split(' · ').map((t: string, i: number) => (
                 <span key={i} className="text-xs font-medium py-1.5 px-3 bg-white border border-slate-200 rounded-full text-slate-600 shadow-sm">
                     {t}
                 </span>

@@ -31,7 +31,7 @@ export const Footer: React.FC<FooterProps> = ({ onStartConversation }) => {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="bg-white/10 backdrop-blur-md border border-white/20 p-6 sm:p-8 md:p-12 lg:p-16 xl:p-20 rounded-xl sm:rounded-2xl text-center shadow-2xl"
          >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 sm:mb-5 md:mb-6 px-2 leading-tight">Let's Build Something Solid.</h2>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold text-white mb-4 sm:mb-5 md:mb-6 px-2 tracking-tight leading-tight">Let's Build Something Solid.</h2>
             <p className="text-base sm:text-lg md:text-lg lg:text-xl text-blue-100 font-light mb-8 sm:mb-10 md:mb-12 max-w-2xl mx-auto px-2 leading-relaxed">
                 Tell us what you're building. We'll tell you how we'd approach it.
             </p>

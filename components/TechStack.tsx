@@ -37,8 +37,8 @@ export const TechStack: React.FC = () => {
       <div className="container mx-auto px-4 sm:px-5 md:px-6 lg:px-8 xl:px-10 2xl:px-12">
         <div className="text-center mb-16">
           <Reveal width="100%">
-             <h2 className="text-4xl md:text-5xl font-bold text-brand-blue mb-6">Technology Stack</h2>
-             <p className="text-slate-500 text-lg max-w-2xl mx-auto mt-4">
+             <h2 className="text-4xl md:text-5xl font-semibold text-brand-blue mb-6 tracking-tight leading-tight">Technology Stack</h2>
+             <p className="text-slate-600 text-lg font-light max-w-2xl mx-auto mt-4 leading-relaxed">
                We work across modern, battle-tested technologies to build scalable software products.
              </p>
           </Reveal>
