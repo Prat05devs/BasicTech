@@ -20,8 +20,11 @@ export interface WorkItem {
   client: string;
   vertical: string;
   solution: string;
+  description?: string; // More detailed description
   tech: string;
   image: string;
+  websiteUrl?: string; // Link to deployed website
+  githubUrl?: string; // Link to GitHub repository
 }
 
 export enum SectionId {
