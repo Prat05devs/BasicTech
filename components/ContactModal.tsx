@@ -29,6 +29,9 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
+    // Combine country code with phone number
+    const fullPhoneNumber = selectedCountry.dialCode + formData.phone;
+    
     // Create email body with form data - comprehensive format
     const inquiryTypeInfo = selectedInquiryType 
       ? `${selectedInquiryType.label}${selectedInquiryType.description ? ` (${selectedInquiryType.description})` : ''}`
@@ -316,8 +319,6 @@ ${formData.name}`;
     };
   }, [isInquiryDropdownOpen, isCountryDropdownOpen]);
 
-  // Combine country code with phone number
-  const fullPhoneNumber = selectedCountry.dialCode + formData.phone;
   return (
     <AnimatePresence>
       {isOpen && (

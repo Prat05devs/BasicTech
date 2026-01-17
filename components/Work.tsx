@@ -86,7 +86,7 @@ const WorkCard: React.FC<{ work: WorkItem, index: number }> = ({ work, index }) 
                 </span>
              ))}
           </div>
-
+          
           {/* Links */}
           {(work.websiteUrl || work.githubUrl) && (
             <div className={`flex flex-wrap gap-2 sm:gap-3 ${index % 2 === 1 ? 'justify-end' : 'justify-start'}`}>

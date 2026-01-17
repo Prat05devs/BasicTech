@@ -87,5 +87,27 @@ export const SELECTED_WORK: WorkItem[] = [
     image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&q=80&w=800",
     websiteUrl: "", // Add deployed website URL here
     githubUrl: "https://github.com/basictech01/cricketvoteblockchain"
+  },
+  {
+    name: "React Native Inventory Management",
+    client: "Enterprise Client",
+    vertical: "Enterprise Software",
+    solution: "A production-ready, cross-platform inventory system with real-time stock, advanced crash prevention, and role-based access control.",
+    description: "Built a comprehensive inventory management system for production environments with multi-location support, real-time stock tracking, and hierarchical organization. Implemented advanced crash prevention with multi-layer error handling, automatic recovery, and 23+ error scenario testing. Features include product management with multi-variant support, barcode scanning, batch & expiry tracking, formula management, role-based access control (Master/Employee/User), audit logging, and analytics dashboards. Includes comprehensive security with JWT authentication, AES-256 encryption, and session monitoring.",
+    tech: "React Native · Expo · TypeScript · Redux Toolkit",
+    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=800", // Placeholder image - replace with actual project image
+    websiteUrl: "",
+    githubUrl: ""
+  },
+  {
+    name: "Dr. Smit Bharat Solanki Website",
+    client: "Dr. Smit Bharat Solanki",
+    vertical: "Healthcare",
+    solution: "A premium, SEO-optimized medical website delivering compassionate women's healthcare information with advanced technology showcases and patient trust signals.",
+    description: "Built a production-grade medical website for a leading gynecologist and robotic surgeon, featuring comprehensive service pages, interactive chatbot (Support Circle), research publications showcase, and clinic management. Implemented SEO-first architecture with per-page metadata, Open Graph tags, and sitemap generation. Features include responsive glassmorphism UI, WhatsApp integration for appointments, FAQ modal system, gallery management, and multi-clinic location pages. Delivered full-stack Next.js implementation with optimized image handling and production-ready performance.",
+    tech: "Next.js · Tailwind CSS · Framer Motion · TypeScript",
+    image: "/drwebsite.png", // Placeholder image - replace with actual project image
+    websiteUrl: "https://www.drsmitbharatsolanki.com/",
+    githubUrl: ""
   }
 ];
