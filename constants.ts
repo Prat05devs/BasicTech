@@ -89,7 +89,7 @@ export const SELECTED_WORK: WorkItem[] = [
     githubUrl: "https://github.com/basictech01/cricketvoteblockchain"
   },
   {
-    name: "React Native Inventory Management",
+    name: "Inventory Management",
     client: "Enterprise Client",
     vertical: "Enterprise Software",
     solution: "A production-ready, cross-platform inventory system with real-time stock, advanced crash prevention, and role-based access control.",
