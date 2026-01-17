@@ -97,7 +97,7 @@ export const SELECTED_WORK: WorkItem[] = [
     tech: "React Native · Expo · TypeScript · Redux Toolkit",
     image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=800", // Placeholder image - replace with actual project image
     websiteUrl: "",
-    githubUrl: ""
+    githubUrl: "https://github.com/samarthsinh2660/inventory-management-system-frontend"
   },
   {
     name: "Dr. Smit Bharat Solanki Website",
@@ -108,6 +108,6 @@ export const SELECTED_WORK: WorkItem[] = [
     tech: "Next.js · Tailwind CSS · Framer Motion · TypeScript",
     image: "/drwebsite.png", // Placeholder image - replace with actual project image
     websiteUrl: "https://www.drsmitbharatsolanki.com/",
-    githubUrl: ""
+    githubUrl: "https://github.com/Prat05devs/DrSolanki"
   }
 ];
