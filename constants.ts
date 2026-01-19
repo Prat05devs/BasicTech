@@ -109,5 +109,16 @@ export const SELECTED_WORK: WorkItem[] = [
     image: "/drwebsite.png", // Placeholder image - replace with actual project image
     websiteUrl: "https://www.drsmitbharatsolanki.com/",
     githubUrl: "https://github.com/Prat05devs/DrSolanki"
+  },
+  {
+    name: "Dapper",
+    client: "Sustainable Fashion Initiative",
+    vertical: "E-Commerce",
+    solution: "A next-generation sustainable fashion marketplace redefining how people buy, sell, and donate pre-owned clothing through a community-driven circular fashion ecosystem.",
+    description: "Built Dapper as a purpose-driven sustainable fashion marketplace that transforms thrift culture into a premium digital experience. Our team participated in Lovable's 'No Code Competition' with over 6,500 participants worldwide, achieving 35th position in the Asia Pacific region and ranking in the top 300 websites globally. The platform features curated product listings, authentication with seller verification, seamless buy/sell/donate flows, city-based availability discovery, and community-driven trust signals. Designed with a minimal, editorial aesthetic that makes second-hand fashion feel premium and desirable. Implemented full-stack architecture with responsive modern UI, emphasizing authenticity, trust, and seamless user journeys to encourage conscious consumption and reduce textile waste.",
+    tech: "Next.js · Tailwind CSS · Node.js · Express · MongoDB · NextAuth · Cloudinary",
+    image: "/dapper.png",
+    websiteUrl: "https://dapper-city-threads.lovable.app/",
+    githubUrl: "https://github.com/Prat05devs/dapper-city-threads"
   }
 ];
