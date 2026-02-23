@@ -56,6 +56,50 @@ export const PROCESS_STEPS: ProcessStep[] = [
 
 export const SELECTED_WORK: WorkItem[] = [
   {
+    name: "Inventory Management",
+    client: "Enterprise Client",
+    vertical: "Enterprise Software",
+    solution: "A production-ready, cross-platform inventory system with real-time stock, advanced crash prevention, and role-based access control.",
+    description: "Built a comprehensive inventory management system for production environments with multi-location support, real-time stock tracking, and hierarchical organization. Implemented advanced crash prevention with multi-layer error handling, automatic recovery, and 23+ error scenario testing. Features include product management with multi-variant support, barcode scanning, batch & expiry tracking, formula management, role-based access control (Master/Employee/User), audit logging, and analytics dashboards. Includes comprehensive security with JWT authentication, AES-256 encryption, and session monitoring.",
+    tech: "React Native · Expo · TypeScript · Redux Toolkit",
+    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=800", // Placeholder image - replace with actual project image
+    websiteUrl: "",
+    githubUrl: "https://github.com/samarthsinh2660/inventory-management-system-frontend"
+  },
+  {
+    name: "HillsQuills",
+    client: "HillsQuills Media",
+    vertical: "Media & Publishing",
+    solution: "Uttarakhand's premier news source, bringing you the latest stories from the hills.",
+    description: "Uttarakhand's premier news source, bringing you the latest stories from the hills.",
+    tech: "Next.js · Tailwind CSS · Node.js · Express · MySQL · NextAuth · Cloudinary",
+    image: "/hillsquills.png",
+    websiteUrl: "https://www.hillsquills.com/",
+    githubUrl: "https://github.com/pranavpandey1998official/hills-quills-backend"
+  },
+  {
+    name: "Dr. Smit Bharat Solanki Website",
+    client: "Dr. Smit Bharat Solanki",
+    vertical: "Healthcare",
+    solution: "A premium, SEO-optimized medical website delivering compassionate women's healthcare information with advanced technology showcases and patient trust signals.",
+    description: "Built a production-grade medical website for a leading gynecologist and robotic surgeon, featuring comprehensive service pages, interactive chatbot (Support Circle), research publications showcase, and clinic management. Implemented SEO-first architecture with per-page metadata, Open Graph tags, and sitemap generation. Features include responsive glassmorphism UI, WhatsApp integration for appointments, FAQ modal system, gallery management, and multi-clinic location pages. Delivered full-stack Next.js implementation with optimized image handling and production-ready performance.",
+    tech: "Next.js · Tailwind CSS · Framer Motion · TypeScript",
+    image: "/drwebsite.png", // Placeholder image - replace with actual project image
+    websiteUrl: "https://www.drsmitbharatsolanki.com/",
+    githubUrl: "https://github.com/Prat05devs/DrSolanki"
+  },
+  {
+    name: "Dapper",
+    client: "Sustainable Fashion Initiative",
+    vertical: "E-Commerce",
+    solution: "A next-generation sustainable fashion marketplace redefining how people buy, sell, and donate pre-owned clothing through a community-driven circular fashion ecosystem.",
+    description: "Built Dapper as a purpose-driven sustainable fashion marketplace that transforms thrift culture into a premium digital experience. Our team participated in Lovable's 'No Code Competition' with over 6,500 participants worldwide, achieving 35th position in the Asia Pacific region and ranking in the top 300 websites globally. The platform features curated product listings, authentication with seller verification, seamless buy/sell/donate flows, city-based availability discovery, and community-driven trust signals. Designed with a minimal, editorial aesthetic that makes second-hand fashion feel premium and desirable. Implemented full-stack architecture with responsive modern UI, emphasizing authenticity, trust, and seamless user journeys to encourage conscious consumption and reduce textile waste.",
+    tech: "Next.js · Tailwind CSS · Node.js · Express · MongoDB · NextAuth · Cloudinary",
+    image: "/dapper.png",
+    websiteUrl: "https://dapper-city-threads.lovable.app/",
+    githubUrl: "https://github.com/Prat05devs/dapper-city-threads"
+  },
+  {
     name: "Kumbh Milan",
     client: "UrbanMatch Inc.",
     vertical: "Social Networking",
@@ -87,38 +131,5 @@ export const SELECTED_WORK: WorkItem[] = [
     image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&q=80&w=800",
     websiteUrl: "", // Add deployed website URL here
     githubUrl: "https://github.com/basictech01/cricketvoteblockchain"
-  },
-  {
-    name: "Inventory Management",
-    client: "Enterprise Client",
-    vertical: "Enterprise Software",
-    solution: "A production-ready, cross-platform inventory system with real-time stock, advanced crash prevention, and role-based access control.",
-    description: "Built a comprehensive inventory management system for production environments with multi-location support, real-time stock tracking, and hierarchical organization. Implemented advanced crash prevention with multi-layer error handling, automatic recovery, and 23+ error scenario testing. Features include product management with multi-variant support, barcode scanning, batch & expiry tracking, formula management, role-based access control (Master/Employee/User), audit logging, and analytics dashboards. Includes comprehensive security with JWT authentication, AES-256 encryption, and session monitoring.",
-    tech: "React Native · Expo · TypeScript · Redux Toolkit",
-    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=800", // Placeholder image - replace with actual project image
-    websiteUrl: "",
-    githubUrl: "https://github.com/samarthsinh2660/inventory-management-system-frontend"
-  },
-  {
-    name: "Dr. Smit Bharat Solanki Website",
-    client: "Dr. Smit Bharat Solanki",
-    vertical: "Healthcare",
-    solution: "A premium, SEO-optimized medical website delivering compassionate women's healthcare information with advanced technology showcases and patient trust signals.",
-    description: "Built a production-grade medical website for a leading gynecologist and robotic surgeon, featuring comprehensive service pages, interactive chatbot (Support Circle), research publications showcase, and clinic management. Implemented SEO-first architecture with per-page metadata, Open Graph tags, and sitemap generation. Features include responsive glassmorphism UI, WhatsApp integration for appointments, FAQ modal system, gallery management, and multi-clinic location pages. Delivered full-stack Next.js implementation with optimized image handling and production-ready performance.",
-    tech: "Next.js · Tailwind CSS · Framer Motion · TypeScript",
-    image: "/drwebsite.png", // Placeholder image - replace with actual project image
-    websiteUrl: "https://www.drsmitbharatsolanki.com/",
-    githubUrl: "https://github.com/Prat05devs/DrSolanki"
-  },
-  {
-    name: "Dapper",
-    client: "Sustainable Fashion Initiative",
-    vertical: "E-Commerce",
-    solution: "A next-generation sustainable fashion marketplace redefining how people buy, sell, and donate pre-owned clothing through a community-driven circular fashion ecosystem.",
-    description: "Built Dapper as a purpose-driven sustainable fashion marketplace that transforms thrift culture into a premium digital experience. Our team participated in Lovable's 'No Code Competition' with over 6,500 participants worldwide, achieving 35th position in the Asia Pacific region and ranking in the top 300 websites globally. The platform features curated product listings, authentication with seller verification, seamless buy/sell/donate flows, city-based availability discovery, and community-driven trust signals. Designed with a minimal, editorial aesthetic that makes second-hand fashion feel premium and desirable. Implemented full-stack architecture with responsive modern UI, emphasizing authenticity, trust, and seamless user journeys to encourage conscious consumption and reduce textile waste.",
-    tech: "Next.js · Tailwind CSS · Node.js · Express · MongoDB · NextAuth · Cloudinary",
-    image: "/dapper.png",
-    websiteUrl: "https://dapper-city-threads.lovable.app/",
-    githubUrl: "https://github.com/Prat05devs/dapper-city-threads"
   }
 ];
