@@ -89,6 +89,17 @@ export const SELECTED_WORK: WorkItem[] = [
     githubUrl: "https://github.com/Prat05devs/DrSolanki"
   },
   {
+    name: "Praeq Talent Management Company",
+    client: "Praeq Talent Management",
+    vertical: "Talent Acquisition",
+    solution: "PRAEQ is a high-performance collective dedicated to transforming exceptional individuals into global icons.",
+    description: "Designed and developed a modern, responsive website for Praeq Talent Management, showcasing their talent roster and services. Integrated dynamic profiles with multimedia, built an intuitive contact system, and implemented SEO and performance optimizations. Delivered a sleek, interactive user experience aligned with the brand’s premium identity and growth goals.",
+    tech: "Next.js · Tailwind CSS · TypeScript",
+    image: "/praeq.png",
+    websiteUrl: "https://www.praeq.in/",
+    githubUrl: "https://github.com/Prat05devs/PRAEQ"
+  },
+  {
     name: "Dapper",
     client: "Sustainable Fashion Initiative",
     vertical: "E-Commerce",
