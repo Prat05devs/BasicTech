@@ -22,78 +22,66 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
   const [selectedCountry, setSelectedCountry] = useState<CountryCode>(DEFAULT_COUNTRY);
   const [isCountryDropdownOpen, setIsCountryDropdownOpen] = useState(false);
   const [countrySearchQuery, setCountrySearchQuery] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
   const inquiryDropdownRef = useRef<HTMLDivElement>(null);
   const countryDropdownRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Combine country code with phone number
-    const fullPhoneNumber = selectedCountry.dialCode + formData.phone;
-    
-    // Create email body with form data - comprehensive format
-    const inquiryTypeInfo = selectedInquiryType 
-      ? `${selectedInquiryType.label}${selectedInquiryType.description ? ` (${selectedInquiryType.description})` : ''}`
-      : 'Not specified';
-    
-    const phoneDisplay = formData.phone 
-      ? `${fullPhoneNumber} (${selectedCountry.flag} ${selectedCountry.name})`
-      : 'Not provided';
-    
-    const emailBody = `Hello Basic Tech Team,
+    setIsSubmitting(true);
 
-I'm interested in discussing a project with Basic Tech.
+    try {
+      const response = await fetch("https://formspree.io/f/xnjbyydj", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          inquiryType: selectedInquiryType?.label || "Not specified",
+          name: formData.name,
+          email: formData.email,
+          phone: `${selectedCountry.dialCode}${formData.phone}`,
+          country: selectedCountry.name,
+          message: formData.message,
+        }),
+      });
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-INQUIRY INFORMATION
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      if (response.ok) {
+        setIsSuccess(true);
 
-Who is enquiring?
-${inquiryTypeInfo}
+        // Reset form
+        setFormData({
+          inquiryType: '',
+          name: '',
+          email: '',
+          phone: '',
+          message: ''
+        });
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-CONTACT DETAILS
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        setSelectedInquiryType(null);
+        setSelectedCountry(DEFAULT_COUNTRY);
+        setCountrySearchQuery('');
+        setIsInquiryDropdownOpen(false);
+        setIsCountryDropdownOpen(false);
 
-Name: ${formData.name}
-Email: ${formData.email}
-Phone: ${phoneDisplay}
+        // Close modal after 2 seconds
+        setTimeout(() => {
+          setIsSuccess(false);
+          onClose();
+        }, 2000);
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-PROJECT DETAILS
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
 
-The Challenge:
-${formData.message}
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-Looking forward to hearing from you.
-
-Best regards,
-${formData.name}`;
-
-    // Encode the email body for mailto link
-    const encodedBody = encodeURIComponent(emailBody);
-    const encodedSubject = encodeURIComponent(`New Project Inquiry - ${selectedInquiryType ? selectedInquiryType.label : 'General Inquiry'}`);
-    
-    // Create mailto link
-    const mailtoLink = `mailto:axolotlcommunications@gmail.com?subject=${encodedSubject}&body=${encodedBody}`;
-    
-    // Open email client
-    window.location.href = mailtoLink;
-    
-    // Reset form and close modal after a short delay
-    setTimeout(() => {
-      setFormData({ inquiryType: '', name: '', email: '', phone: '', message: '' });
-      setSelectedInquiryType(null);
-      setSelectedCountry(DEFAULT_COUNTRY);
-      setCountrySearchQuery('');
-      setIsInquiryDropdownOpen(false);
-      setIsCountryDropdownOpen(false);
-      onClose();
-    }, 500);
+    } catch (error) {
+      alert("Error sending message. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -583,11 +571,20 @@ ${formData.name}`;
                         </div>
 
                         <button 
-                            type="submit" 
-                            className="w-full bg-brand-blue text-white font-medium py-3 xs:py-3.5 sm:py-4 rounded-lg xs:rounded-xl shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 active:shadow-blue-500/30 active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2 group mt-1 xs:mt-2 min-h-[44px] touch-manipulation"
+                          type="submit" 
+                          disabled={isSubmitting}
+                          className="w-full bg-brand-blue text-white font-medium py-3 xs:py-3.5 sm:py-4 rounded-lg xs:rounded-xl shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 active:shadow-blue-500/30 active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2 group mt-1 xs:mt-2 min-h-[44px] touch-manipulation disabled:opacity-70 disabled:cursor-not-allowed"
                         >
-                            <span className="text-sm xs:text-base">Send Request</span>
-                            <Send size={16} className="xs:w-[18px] xs:h-[18px] group-hover:translate-x-0.5 transition-transform" />
+                          {isSubmitting ? (
+                            <span className="text-sm xs:text-base">Sending...</span>
+                          ) : isSuccess ? (
+                            <span className="text-sm xs:text-base">Sent Successfully ✓</span>
+                          ) : (
+                            <>
+                              <span className="text-sm xs:text-base">Send Request</span>
+                              <Send size={16} className="xs:w-[18px] xs:h-[18px] group-hover:translate-x-0.5 transition-transform" />
+                            </>
+                          )}
                         </button>
                     </form>
                     </div>
