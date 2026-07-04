@@ -22,6 +22,17 @@ export const TEAM: TeamMember[] = [
     { label: 'GitHub', href: 'https://github.com/pranavpandey1998official' }
   ]
 },
+{
+  slug: 'malav-patel',
+  name: 'Malav Patel',
+  role: 'Europe Charter Lead - AI Solutions Architecture & Forward Deployed Engineering',
+  bio: 'Malav leads Basic Tech’s Europe charter across AI solution architecture, forward deployed engineering, production AI systems, and compliance-first delivery. With 12+ years in technology and deep experience in agentic AI, RAG, AI security, MLOps, cloud infrastructure, and EU-compliant SaaS, he helps Basic Tech design scalable, governed, audited, and production-ready AI solutions for global clients.',
+  photo: '/malavPhoto.jpeg',
+  links: [
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/malavpatel112/' },
+    { label: 'GitHub', href: 'https://github.com/mlvpatel' }
+  ]
+},
   {
   slug: 'prateek-thapliyal',
   name: 'Prateek Thapliyal',
