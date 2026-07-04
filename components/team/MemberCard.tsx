@@ -11,7 +11,7 @@ export const MemberCard: React.FC<{ member: TeamMember }> = ({ member }) => (
     className="flex flex-col"
   >
     <div className="aspect-square w-full bg-slate-100 rounded-lg mb-4 overflow-hidden">
-      {member.photo && <img src={member.photo} alt={member.name} className="w-full h-full object-cover grayscale" />}
+      {member.photo && <img src={member.photo} alt={member.name} className="w-full h-full object-cover" />}
     </div>
     <h3 className="text-lg font-semibold text-slate-900 tracking-tight">{member.name}</h3>
     <p className="text-sm text-brand-blue font-medium mb-2">{member.role}</p>

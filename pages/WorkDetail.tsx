@@ -4,6 +4,15 @@ import { getProjectBySlug, getNextProject, TYPE_LABELS, TAG_LABELS } from '../li
 import { useContact } from '../components/layout/ContactContext';
 import { Seo } from '../components/Seo';
 import { Reveal } from '../components/ui/Reveal';
+import type { ProjectCaseStudyListItem } from '../types';
+
+type CaseStudyBody = string | string[];
+type WorkDetailSection = {
+  title: string;
+  body?: CaseStudyBody;
+  items?: ProjectCaseStudyListItem[];
+  closingBody?: CaseStudyBody;
+};
 
 const WorkDetail: React.FC = () => {
   const { slug = '' } = useParams();
@@ -13,6 +22,23 @@ const WorkDetail: React.FC = () => {
   if (!project) return <Navigate to="/" replace />;
 
   const next = getNextProject(project.slug);
+  const sections: WorkDetailSection[] = [
+    { title: 'Project Overview', body: project.caseStudy.overview },
+    { title: 'The Challenge', body: project.caseStudy.challenge, items: project.caseStudy.challengeItems },
+    { title: 'Key Constraints', items: project.caseStudy.keyConstraints },
+    { title: 'Our Approach', body: project.caseStudy.approach, items: project.caseStudy.approachItems },
+    {
+      title: 'The Outcome',
+      body: project.caseStudy.outcome,
+      items: project.caseStudy.outcomeItems,
+      closingBody: project.caseStudy.outcomeClosing,
+    },
+    {
+      title: 'What Made This Work',
+      body: project.caseStudy.whatMadeThisWorkBody,
+      items: project.caseStudy.whatMadeThisWork,
+    },
+  ].filter(section => section.body || section.closingBody || (section.items && section.items.length > 0));
 
   return (
     <article className="pt-32 pb-24 bg-white">
@@ -50,6 +76,11 @@ const WorkDetail: React.FC = () => {
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-slate-900 tracking-tight leading-tight mb-3">
             {project.name}
           </h1>
+          {project.caseStudyTitle && (
+            <p className="text-xl sm:text-2xl text-slate-800 font-light leading-snug mb-3 max-w-3xl">
+              {project.caseStudyTitle}
+            </p>
+          )}
           <p className="text-base sm:text-lg text-slate-600 font-light mb-2">{project.client} · {project.vertical}</p>
           <p className="text-lg text-slate-700 font-light leading-relaxed max-w-2xl">{project.summary}</p>
 
@@ -74,23 +105,18 @@ const WorkDetail: React.FC = () => {
           <img src={project.cover} alt={project.name} className="w-full h-full object-contain" />
         </div>
 
-        {/* Narrative */}
+        {/* Case Study */}
         <div className="grid grid-cols-1 gap-10">
-          <Section title="The Problem" body={project.problem} />
-          <Section title="Our Approach" body={project.approach} />
-          <Section title="Outcome" body={project.outcome} />
+          {sections.map(section => (
+            <CaseStudySection
+              key={section.title}
+              title={section.title}
+              body={section.body}
+              items={section.items}
+              closingBody={section.closingBody}
+            />
+          ))}
         </div>
-
-        {/* Highlights */}
-        {project.highlights && project.highlights.length > 0 && (
-          <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {project.highlights.map((h, i) => (
-              <div key={i} className="border-l-2 border-brand-blue pl-4">
-                <p className="text-sm font-medium text-slate-800 leading-snug">{h}</p>
-              </div>
-            ))}
-          </div>
-        )}
 
         {/* Tech */}
         <div className="mt-12">
@@ -131,11 +157,57 @@ const WorkDetail: React.FC = () => {
   );
 };
 
-const Section: React.FC<{ title: string; body: string }> = ({ title, body }) => (
-  <div>
-    <h2 className="text-xs font-semibold tracking-widest text-slate-400 uppercase mb-3">{title}</h2>
-    <p className="text-base text-slate-700 font-light leading-relaxed">{body}</p>
-  </div>
-);
+const toParagraphs = (body?: CaseStudyBody): string[] => {
+  if (!body) return [];
+  return (Array.isArray(body) ? body : body.split(/\n{2,}/))
+    .map(paragraph => paragraph.trim())
+    .filter(Boolean);
+};
+
+const CaseStudySection: React.FC<{
+  title: string;
+  body?: CaseStudyBody;
+  items?: ProjectCaseStudyListItem[];
+  closingBody?: CaseStudyBody;
+}> = ({ title, body, items, closingBody }) => {
+  const bodyParagraphs = toParagraphs(body);
+  const closingParagraphs = toParagraphs(closingBody);
+
+  return (
+    <div>
+      <h2 className="text-xs font-semibold tracking-widest text-slate-400 uppercase mb-3">{title}</h2>
+      {bodyParagraphs.length > 0 && (
+        <div className="space-y-4">
+          {bodyParagraphs.map((paragraph, i) => (
+            <p key={i} className="text-base text-slate-700 font-light leading-relaxed">{paragraph}</p>
+          ))}
+        </div>
+      )}
+      {items && items.length > 0 && (
+        <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 ${bodyParagraphs.length > 0 ? 'mt-5' : ''}`}>
+          {items.map((item, i) => (
+            <div key={i} className="border-l-2 border-brand-blue pl-4">
+              {typeof item === 'string' ? (
+                <p className="text-sm font-medium text-slate-800 leading-snug">{item}</p>
+              ) : (
+                <div className="space-y-1.5">
+                  <h3 className="text-sm font-semibold text-slate-900 leading-snug">{item.title}</h3>
+                  <p className="text-sm text-slate-600 font-light leading-relaxed">{item.description}</p>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+      {closingParagraphs.length > 0 && (
+        <div className="mt-5 space-y-4">
+          {closingParagraphs.map((paragraph, i) => (
+            <p key={i} className="text-base text-slate-700 font-light leading-relaxed">{paragraph}</p>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
 
 export default WorkDetail;
