@@ -1,0 +1,301 @@
+---
+title: "Harness Loops, Agents, and Skills: The Three Layers of Modern AI Systems"
+date: "2026-07-04"
+excerpt: "Skills, agents, and harness loops are often used interchangeably — but each solves a different problem. A field guide to the layers that make LLM apps reliable."
+tags: ["ai", "architecture", "agents"]
+author: "Basic Tech"
+---
+
+The rise of Large Language Models has changed how software is built. Instead of
+writing deterministic logic for every workflow, developers are increasingly
+building systems that can reason, make decisions, and interact with tools.
+
+As these systems grow more sophisticated, three concepts show up again and again:
+
+- **Skills**
+- **Agents**
+- **Harness loops**
+
+They're often used interchangeably, but they sit at different layers of an AI
+architecture. Understanding what each one owns is essential for designing
+reliable, scalable systems.
+
+## The simple analogy
+
+Imagine building a company.
+
+- **Skills** are the employees who know how to do specific jobs.
+- The **agent** is the manager who decides who should do what.
+- The **harness loop** is the operating system that supervises everything —
+  keeping work on track, handling failures, and deciding when the job is done.
+
+Each layer builds on the one below it.
+
+## Layer 1: Skills
+
+A **skill** is a reusable capability. It performs one well-defined task with a
+clear input and output.
+
+Examples:
+
+- Search the web
+- Read a PDF
+- Query a database
+- Generate an image
+- Send an email
+- Summarize text
+- Execute SQL
+- Retrieve from a vector database
+
+A skill generally does **not** make decisions. It performs work when asked.
+
+```txt
+Skill:
+  Input:  "Summarize this PDF."
+  Output: "A two-page summary."
+```
+
+Good skills are small, focused, reusable, and independently testable. Think of
+them as APIs with a bit of intelligence baked in.
+
+## Layer 2: Agents
+
+An **agent** is responsible for reasoning. Instead of performing a single task,
+it decides:
+
+- What needs to be done
+- Which skill to use
+- In what order
+- Whether more information is required
+
+The agent has access to multiple skills and picks between them based on the
+user's objective.
+
+For example, if the user asks:
+
+> "Research Tesla's latest earnings and create a presentation."
+
+The agent might decide to:
+
+1. Search the web
+2. Read financial reports
+3. Extract revenue numbers
+4. Generate charts
+5. Build a slide deck
+6. Verify important facts
+
+The agent orchestrates work rather than performing it directly. Its
+responsibilities include planning, reasoning, tool selection, decision making,
+memory, and handling unexpected situations.
+
+## Layer 3: The harness loop
+
+A **harness loop** is the runtime that controls the agent. It continuously:
+
+1. Sends the current state to the LLM
+2. Receives the next action
+3. Executes the requested skill
+4. Captures the result
+5. Updates the conversation state
+6. Repeats until the task is complete
+
+A simplified version looks like this:
+
+```python
+while not finished:
+    action = ask_llm(state)
+    if action.is_tool_call:
+        result = execute_tool(action)
+        state = update_context(state, result)
+    else:
+        finished = True
+```
+
+The harness isn't intelligent by itself. It provides control, reliability,
+safety, and execution management. Without a harness, an agent only produces
+text. With one, it becomes an executable system.
+
+## Responsibilities at a glance
+
+| Responsibility        | Skill     | Agent     | Harness Loop |
+| --------------------- | --------- | --------- | ------------ |
+| Performs work         | Yes       | Sometimes | No           |
+| Makes decisions       | No        | Yes       | No           |
+| Calls tools           | No        | Yes       | Executes them|
+| Controls execution    | No        | Partially | Yes          |
+| Maintains runtime     | No        | No        | Yes          |
+| Handles retries       | No        | No        | Yes          |
+| Handles timeouts      | No        | No        | Yes          |
+| Handles errors        | No        | Sometimes | Yes          |
+| Stores execution state| No        | Partial   | Yes          |
+
+## How they work together
+
+Suppose a user asks:
+
+> "Find the best hotels in Tokyo under $200 and create a travel itinerary."
+
+The execution flow might look like this:
+
+<div className="not-prose my-10 rounded-2xl border border-slate-200 bg-gradient-to-b from-white to-slate-50 p-6 sm:p-8 shadow-sm">
+  <svg viewBox="0 0 800 700" className="mx-auto h-auto w-full max-w-3xl" role="img" aria-label="Execution flow: user, harness loop, agent, parallel skills, itinerary skill, final response" xmlns="http://www.w3.org/2000/svg" fontFamily="Inter, ui-sans-serif, system-ui, sans-serif">
+    <defs>
+      <marker id="flow-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8" />
+      </marker>
+    </defs>
+    <rect x="330" y="20" width="140" height="44" rx="22" fill="#0f172a" />
+    <text x="400" y="48" textAnchor="middle" fill="#ffffff" fontSize="14" fontWeight="600">User</text>
+    <line x1="400" y1="64" x2="400" y2="94" stroke="#94a3b8" strokeWidth="1.5" markerEnd="url(#flow-arrow)" />
+    <rect x="60" y="100" width="680" height="80" rx="16" fill="#f8fafc" stroke="#cbd5e1" />
+    <rect x="60" y="100" width="6" height="80" rx="3" fill="#0f172a" />
+    <text x="84" y="130" fill="#0f172a" fontSize="14" fontWeight="700">Harness Loop</text>
+    <text x="84" y="152" fill="#64748b" fontSize="12">Iteration · State · Retries · Logging · Safety · Execution</text>
+    <line x1="400" y1="180" x2="400" y2="214" stroke="#94a3b8" strokeWidth="1.5" markerEnd="url(#flow-arrow)" />
+    <rect x="220" y="220" width="360" height="80" rx="16" fill="#eff6ff" stroke="#2F80ED" />
+    <rect x="220" y="220" width="6" height="80" rx="3" fill="#2F80ED" />
+    <text x="244" y="250" fill="#0f172a" fontSize="14" fontWeight="700">Agent</text>
+    <text x="244" y="272" fill="#334155" fontSize="12">Plans the goal · Selects the next skill</text>
+    <path d="M 400 300 L 400 340 L 230 340 L 230 370" stroke="#94a3b8" strokeWidth="1.5" fill="none" markerEnd="url(#flow-arrow)" />
+    <path d="M 400 300 L 400 340 L 570 340 L 570 370" stroke="#94a3b8" strokeWidth="1.5" fill="none" markerEnd="url(#flow-arrow)" />
+    <rect x="120" y="376" width="220" height="80" rx="14" fill="#ffffff" stroke="#e2e8f0" />
+    <rect x="120" y="376" width="6" height="80" rx="3" fill="#2F80ED" />
+    <text x="144" y="406" fill="#0f172a" fontSize="13" fontWeight="700">Hotel Search</text>
+    <text x="144" y="428" fill="#64748b" fontSize="12">Skill · finds hotels ≤ $200</text>
+    <rect x="460" y="376" width="220" height="80" rx="14" fill="#ffffff" stroke="#e2e8f0" />
+    <rect x="460" y="376" width="6" height="80" rx="3" fill="#2F80ED" />
+    <text x="484" y="406" fill="#0f172a" fontSize="13" fontWeight="700">Maps</text>
+    <text x="484" y="428" fill="#64748b" fontSize="12">Skill · plans routes</text>
+    <path d="M 230 456 L 230 490 L 400 490 L 400 514" stroke="#94a3b8" strokeWidth="1.5" fill="none" markerEnd="url(#flow-arrow)" />
+    <path d="M 570 456 L 570 490 L 400 490" stroke="#94a3b8" strokeWidth="1.5" fill="none" />
+    <rect x="290" y="520" width="220" height="80" rx="14" fill="#ffffff" stroke="#e2e8f0" />
+    <rect x="290" y="520" width="6" height="80" rx="3" fill="#2F80ED" />
+    <text x="314" y="550" fill="#0f172a" fontSize="13" fontWeight="700">Itinerary</text>
+    <text x="314" y="572" fill="#64748b" fontSize="12">Skill · builds the day-by-day plan</text>
+    <line x1="400" y1="600" x2="400" y2="634" stroke="#94a3b8" strokeWidth="1.5" markerEnd="url(#flow-arrow)" />
+    <rect x="300" y="640" width="200" height="44" rx="22" fill="#2F80ED" />
+    <text x="400" y="668" textAnchor="middle" fill="#ffffff" fontSize="14" fontWeight="600">Final Response</text>
+  </svg>
+</div>
+
+- The **skills** perform the individual tasks.
+- The **agent** decides which skills to invoke.
+- The **harness loop** manages execution, coordinates interactions, and decides
+  when the workflow is finished.
+
+## Why the harness matters
+
+Many developers assume the LLM itself is the agent. In reality, the LLM is
+usually just the reasoning engine. The harness provides the parts that make it
+production-ready:
+
+- Executing tool calls
+- Maintaining conversation history
+- Limiting the number of iterations
+- Preventing infinite loops
+- Applying safety policies
+- Logging and metrics
+- Recovering from failures
+- Managing cost
+
+Without a harness, there is no controlled execution environment — just a chat
+completion in a for-loop.
+
+## A real example: customer support AI
+
+**Skills**
+
+- Search documentation
+- Read order information
+- Issue refunds
+- Create tickets
+- Send emails
+
+**Agent**
+
+Decides whether the user needs a refund, whether a human should be involved,
+whether documentation should be searched first, and whether the issue can be
+resolved automatically.
+
+**Harness loop**
+
+Tracks conversation state, executes the selected skills, retries failed API
+calls, logs every action, prevents endless reasoning loops, and closes the
+interaction once the issue is resolved.
+
+## The same pattern across frameworks
+
+| Framework           | Skills   | Agent                 | Harness              |
+| ------------------- | -------- | --------------------- | -------------------- |
+| OpenAI Agents SDK   | Tools    | Agent                 | Runner               |
+| LangGraph           | Nodes    | Agent                 | Graph Runtime        |
+| AutoGen             | Tools    | Conversational Agents | Conversation Loop    |
+| CrewAI              | Tools    | Crew Members          | Workflow Engine      |
+| Semantic Kernel     | Plugins  | Planner               | Kernel Runtime       |
+
+Terminology differs, but the architecture is remarkably consistent.
+
+## Common misconceptions
+
+**"An agent is just an LLM."** Not quite. An LLM provides reasoning; an agent
+combines that reasoning with goals, memory, planning, and access to tools.
+
+**"Skills are agents."** No. Skills are task-specific capabilities. They don't
+plan or choose actions on their own.
+
+**"The harness is part of the agent."** Usually not. The harness is the
+execution environment that repeatedly invokes the agent, runs the requested
+skills, updates state, and decides when to stop.
+
+## Architectural view
+
+<div className="not-prose my-10 rounded-2xl border border-slate-200 bg-gradient-to-b from-white to-slate-50 p-6 sm:p-8 shadow-sm">
+  <svg viewBox="0 0 800 460" className="mx-auto h-auto w-full max-w-3xl" role="img" aria-label="Nested architectural view: harness loop wraps agent, which contains skills" xmlns="http://www.w3.org/2000/svg" fontFamily="Inter, ui-sans-serif, system-ui, sans-serif">
+    <rect x="20" y="20" width="760" height="420" rx="22" fill="#f8fafc" stroke="#cbd5e1" strokeWidth="1.5" />
+    <rect x="40" y="36" width="150" height="30" rx="15" fill="#0f172a" />
+    <text x="115" y="55" textAnchor="middle" fill="#ffffff" fontSize="11" fontWeight="700" letterSpacing="0.08em">HARNESS LOOP</text>
+    <text x="205" y="55" fill="#64748b" fontSize="12">Iteration · State · Retry · Logging · Safety · Execution</text>
+    <rect x="60" y="90" width="680" height="330" rx="18" fill="#eff6ff" stroke="#2F80ED" strokeWidth="1.5" />
+    <rect x="80" y="106" width="80" height="30" rx="15" fill="#2F80ED" />
+    <text x="120" y="125" textAnchor="middle" fill="#ffffff" fontSize="11" fontWeight="700" letterSpacing="0.08em">AGENT</text>
+    <text x="175" y="125" fill="#334155" fontSize="12">Reasoning · Planning · Tool Selection · Memory</text>
+    <rect x="90" y="170" width="200" height="230" rx="14" fill="#ffffff" stroke="#e2e8f0" />
+    <circle cx="120" cy="200" r="16" fill="#dbeafe" />
+    <text x="120" y="200" textAnchor="middle" dominantBaseline="central" fill="#2F80ED" fontSize="14" fontWeight="700">S</text>
+    <text x="148" y="205" fill="#0f172a" fontSize="13" fontWeight="700">Skill</text>
+    <line x1="106" y1="228" x2="274" y2="228" stroke="#e2e8f0" />
+    <text x="106" y="254" fill="#334155" fontSize="12">Search</text>
+    <text x="106" y="278" fill="#334155" fontSize="12">Calculator</text>
+    <text x="106" y="302" fill="#334155" fontSize="12">Summarize</text>
+    <rect x="300" y="170" width="200" height="230" rx="14" fill="#ffffff" stroke="#e2e8f0" />
+    <circle cx="330" cy="200" r="16" fill="#dbeafe" />
+    <text x="330" y="200" textAnchor="middle" dominantBaseline="central" fill="#2F80ED" fontSize="14" fontWeight="700">S</text>
+    <text x="358" y="205" fill="#0f172a" fontSize="13" fontWeight="700">Skill</text>
+    <line x1="316" y1="228" x2="484" y2="228" stroke="#e2e8f0" />
+    <text x="316" y="254" fill="#334155" fontSize="12">Database</text>
+    <text x="316" y="278" fill="#334155" fontSize="12">OCR</text>
+    <text x="316" y="302" fill="#334155" fontSize="12">Vector search</text>
+    <rect x="510" y="170" width="200" height="230" rx="14" fill="#ffffff" stroke="#e2e8f0" />
+    <circle cx="540" cy="200" r="16" fill="#dbeafe" />
+    <text x="540" y="200" textAnchor="middle" dominantBaseline="central" fill="#2F80ED" fontSize="14" fontWeight="700">S</text>
+    <text x="568" y="205" fill="#0f172a" fontSize="13" fontWeight="700">Skill</text>
+    <line x1="526" y1="228" x2="694" y2="228" stroke="#e2e8f0" />
+    <text x="526" y="254" fill="#334155" fontSize="12">Email</text>
+    <text x="526" y="278" fill="#334155" fontSize="12">Image Gen</text>
+    <text x="526" y="302" fill="#334155" fontSize="12">Send message</text>
+  </svg>
+</div>
+
+## Final thoughts
+
+As AI systems evolve, separating **skills**, **agents**, and **harness loops**
+leads to architectures that are easier to understand, maintain, and scale.
+
+- **Skills** encapsulate specific capabilities.
+- **Agents** decide how to achieve a goal by selecting and coordinating those
+  capabilities.
+- **Harness loops** provide the execution framework that manages state, invokes
+  skills, handles failures, and knows when the task is done.
+
+Design with these layers in mind and your AI applications will stay modular,
+reliable, and adaptable as complexity grows.

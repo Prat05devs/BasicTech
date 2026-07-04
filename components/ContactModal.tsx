@@ -7,9 +7,10 @@ import { INQUIRY_TYPES, DEFAULT_INQUIRY_TYPE, InquiryType } from '../inquiryType
 interface ContactModalProps {
   isOpen: boolean;
   onClose: () => void;
+  context?: string;
 }
 
-export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
+export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose, context }) => {
   const [formData, setFormData] = useState({
     inquiryType: '',
     name: '',
@@ -46,6 +47,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
           phone: `${selectedCountry.dialCode}${formData.phone}`,
           country: selectedCountry.name,
           message: formData.message,
+          source: context || "Direct",
         }),
       });
 
@@ -360,6 +362,12 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
                     <div className="p-4 xs:p-5 sm:p-6 md:p-8 lg:p-10">
                         <h2 className="text-2xl xs:text-2xl sm:text-3xl md:text-3xl font-semibold text-slate-900 mb-1.5 xs:mb-2 pr-8 sm:pr-10">Let's Build It.</h2>
                         <p className="text-sm xs:text-base sm:text-base text-slate-500 mb-5 xs:mb-6 sm:mb-7 md:mb-8 font-light leading-relaxed">Tell us about your project. We'll get back to you within 24 hours.</p>
+
+                        {context && (
+                          <div className="mb-5 inline-flex items-center gap-2 bg-blue-50 border border-brand-blue/20 text-brand-blue text-xs font-medium px-3 py-1.5 rounded-full">
+                            {context}
+                          </div>
+                        )}
 
                         <form className="space-y-3.5 xs:space-y-4 sm:space-y-5" onSubmit={handleSubmit}>
                         {/* Inquiry Type Dropdown */}

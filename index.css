@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* Fluid Typography System - Scales smoothly across all viewport sizes */
 :root {
   /* Base font sizes that scale with viewport */
