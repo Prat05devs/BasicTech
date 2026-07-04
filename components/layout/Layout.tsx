@@ -12,7 +12,6 @@ const NAV_LINKS = [
   { to: '/infra', label: 'AI Infra' },
   { to: '/team', label: 'Team' },
   { to: '/blog', label: 'Blog' },
-  { to: '/research', label: 'Research' },
 ];
 
 export const Nav: React.FC = () => {

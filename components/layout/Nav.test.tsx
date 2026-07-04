@@ -23,7 +23,6 @@ describe('Nav', () => {
     expect(screen.getAllByRole('link', { name: 'AI Infra' }).length).toBeGreaterThan(0)
     expect(screen.getAllByRole('link', { name: 'Team' }).length).toBeGreaterThan(0)
     expect(screen.getAllByRole('link', { name: 'Blog' }).length).toBeGreaterThan(0)
-    expect(screen.getAllByRole('link', { name: 'Research' }).length).toBeGreaterThan(0)
   })
 
   it('toggles the mobile menu panel', () => {

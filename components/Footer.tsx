@@ -14,7 +14,6 @@ const PAGE_LINKS = [
   { to: '/infra', label: 'AI Infra' },
   { to: '/team', label: 'Team' },
   { to: '/blog', label: 'Blog' },
-  { to: '/research', label: 'Research' },
   { to: '/engagement', label: 'Engagement' },
 ];
 

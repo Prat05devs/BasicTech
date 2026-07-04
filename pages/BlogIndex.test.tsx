@@ -9,7 +9,7 @@ describe('BlogIndex', () => {
     render(<MemoryRouter><BlogIndex /></MemoryRouter>);
     const list = screen.getByTestId('post-list');
     expect(within(list).getAllByRole('link').length).toBe(BLOG.length);
-    expect(within(list).getByText('Welcome to the Basic Tech blog')).toBeInTheDocument();
-    expect(within(list).getByRole('link', { name: /Welcome to the Basic Tech blog/ })).toHaveAttribute('href', '/blog/hello-world');
+    expect(within(list).getByText(/Harness Loops, Agents, and Skills/)).toBeInTheDocument();
+    expect(within(list).getByRole('link', { name: /Harness Loops, Agents, and Skills/ })).toHaveAttribute('href', '/blog/harness-loops-agents-skills');
   });
 });

@@ -9,6 +9,7 @@ export interface Product {
   category: string;      // e.g. 'AI', 'DevTools', 'Productivity'
   cover?: string;
   url?: string;          // present when beta/live
+  appStoreUrl?: string;  // iOS App Store link
 }
 
 export const STATUS_LABELS: Record<ProductStatus, string> = {
@@ -25,30 +26,17 @@ export const STATUS_STYLES: Record<ProductStatus, string> = {
   live: 'bg-emerald-50 text-emerald-700 border-emerald-200',
 };
 
-// Placeholder catalog — TODO: replace with real products, taglines, and statuses.
 export const PRODUCTS: Product[] = [
   {
-    slug: 'product-one',
-    name: 'TODO: Product One',
-    tagline: 'TODO: one-line value proposition for product one.',
-    description: 'TODO: what it does, who it is for, and why it matters.',
-    status: 'building',
-    category: 'AI',
-  },
-  {
-    slug: 'product-two',
-    name: 'TODO: Product Two',
-    tagline: 'TODO: one-line value proposition for product two.',
-    description: 'TODO: what it does, who it is for, and why it matters.',
-    status: 'coming-soon',
-    category: 'DevTools',
-  },
-  {
-    slug: 'product-three',
-    name: 'TODO: Product Three',
-    tagline: 'TODO: one-line value proposition for product three.',
-    description: 'TODO: what it does, who it is for, and why it matters.',
-    status: 'beta',
+    slug: 'uniun',
+    name: 'Uniun',
+    tagline: 'Your decentralized second brain.',
+    description:
+      'A note-taking app built on Nostr. Capture notes, connect them into a knowledge graph, share on an open network, and chat with an on-device AI — your keys, your data, no cloud in the middle.',
+    status: 'live',
     category: 'Productivity',
+    cover: '/uniun-logo.png',
+    url: 'https://www.uniun.in/',
+    appStoreUrl: 'https://apps.apple.com/in/app/uniun/id6778077321',
   },
 ];

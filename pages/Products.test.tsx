@@ -1,9 +1,8 @@
 import { describe, it, expect } from 'vitest'
-import { render, screen, fireEvent, within } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { ContactProvider, useContact } from '../components/layout/ContactContext'
 import Products from './Products'
-import { PRODUCTS } from '../data/products'
 
 function Probe() {
   const { isOpen, context } = useContact()
@@ -22,17 +21,33 @@ function renderPage() {
 }
 
 describe('Products', () => {
-  it('renders a card per product with status badges', () => {
+  it('renders the Uniun feature with headline, status, and CTAs', () => {
     renderPage()
-    const grid = screen.getByTestId('product-grid')
-    expect(within(grid).getAllByRole('heading', { level: 3 }).length).toBe(PRODUCTS.length)
-    expect(within(grid).getAllByText('In Development').length).toBeGreaterThan(0)
+    const feature = screen.getByTestId('uniun-feature')
+    expect(feature).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 3, name: 'Uniun' })).toBeInTheDocument()
+    expect(screen.getByText('Live')).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /visit uniun\.in/i })).toHaveAttribute('href', 'https://www.uniun.in/')
+    expect(screen.getByRole('link', { name: /app store/i })).toHaveAttribute(
+      'href',
+      'https://apps.apple.com/in/app/uniun/id6778077321',
+    )
   })
 
-  it('"Notify me" opens the contact modal tagged with the product name', () => {
+  it('carousel cycles through the three Uniun pillars', async () => {
     renderPage()
-    const grid = screen.getByTestId('product-grid')
-    fireEvent.click(within(grid).getAllByRole('button', { name: 'Notify me' })[0])
-    expect(screen.getByTestId('probe')).toHaveTextContent(`open|Product waitlist: ${PRODUCTS[0].name}`)
+    // Starts on Brahma
+    expect(screen.getByText(/Brahma · Create/i)).toBeInTheDocument()
+
+    const nextBtn = screen.getByRole('button', { name: /next screenshot/i })
+    fireEvent.click(nextBtn)
+    expect(await screen.findByText(/Vishnu · Reflect/i)).toBeInTheDocument()
+
+    fireEvent.click(nextBtn)
+    expect(await screen.findByText(/Shiv · Transform/i)).toBeInTheDocument()
+
+    // Wraps back to Brahma
+    fireEvent.click(nextBtn)
+    expect(await screen.findByText(/Brahma · Create/i)).toBeInTheDocument()
   })
 })

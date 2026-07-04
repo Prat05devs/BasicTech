@@ -16,9 +16,9 @@ function renderAt(path: string) {
 
 describe('BlogPost', () => {
   it('renders the MDX body of a known post', () => {
-    renderAt('/blog/hello-world');
-    expect(screen.getByRole('heading', { level: 1, name: 'Welcome to the Basic Tech blog' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'Why we write' })).toBeInTheDocument(); // from the MDX body
+    renderAt('/blog/harness-loops-agents-skills');
+    expect(screen.getByRole('heading', { level: 1, name: /Harness Loops, Agents, and Skills/ })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'The simple analogy' })).toBeInTheDocument(); // from the MDX body
   });
   it('redirects an unknown slug to /blog', () => {
     renderAt('/blog/nope');
