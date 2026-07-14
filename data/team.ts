@@ -33,6 +33,13 @@ export const TEAM: TeamMember[] = [
     { label: 'GitHub', href: 'https://github.com/mlvpatel' }
   ]
 },
+{
+  slug: 'kevin-patel',
+  name: 'Kevin Patel',
+  role: 'Senior Consultant - Planet-Scale Systems & Mobile Engineering Strategy',
+  bio: 'Kevin supports Basic Tech as a senior consultant with global engineering experience from Google in Poland, where he built planet-scale distributed filesystem replication. He also brings deep mobile expertise across Android, iOS, React Native, and Flutter.',
+  photo: '/kevinpatel.png',
+},
   {
   slug: 'prateek-thapliyal',
   name: 'Prateek Thapliyal',
