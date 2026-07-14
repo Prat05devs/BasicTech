@@ -1,0 +1,410 @@
+---
+title: "Stop Asking the LLM to Do Everything: The Most Important Rule in Agent Engineering"
+date: "2026-07-13"
+excerpt: "Great agents don't ask the model to do everything. They keep deterministic work in code and reserve LLM calls for ambiguity and reasoning."
+tags: ["ai", "agents", "engineering"]
+author: "Basic Tech"
+---
+
+One of the biggest misconceptions about AI agents is that they are simply a
+series of prompts sent to a large language model (LLM). New developers often
+imagine an agent as an intelligent system where the model makes every decision,
+performs every calculation, and controls every action.
+
+In practice, that's exactly how you end up with agents that are slow, expensive,
+and unreliable.
+
+The best AI agents treat the language model as a **reasoning engine**, not as a
+replacement for software engineering.
+
+Understanding **when to call the model** and **when to write deterministic
+code** is perhaps the single most important skill in modern agent development.
+
+---
+
+## The Golden Rule
+
+If a computer can solve the problem exactly, don't ask the model.
+
+Computers are deterministic. Given the same input, they always produce the same
+output.
+
+Language models are probabilistic. They generate the most likely next token
+based on patterns they've learned. Even with temperature set to zero, they are
+still reasoning statistically rather than executing an algorithm.
+
+Whenever an exact algorithm exists, write code.
+
+Whenever no exact algorithm exists, use the model.
+
+That simple distinction can dramatically improve the quality of your agents.
+
+---
+
+## Think Like an Engineer
+
+Imagine you're building an agent and you encounter a task.
+
+Before reaching for the LLM, ask yourself one question:
+
+> **Can I write an algorithm for this?**
+
+If the answer is yes, the solution belongs in code.
+
+Examples include:
+
+- Sorting a list
+- Searching a database
+- Calculating totals
+- Parsing JSON
+- Reading files
+- Calling APIs
+- Validating email addresses
+- Formatting dates
+- Checking permissions
+- Executing shell commands
+
+These are deterministic problems.
+
+They have one correct answer.
+
+Using an LLM here only makes the system slower, more expensive, and less
+reliable.
+
+---
+
+## Where LLMs Actually Shine
+
+Now consider a different category of problems.
+
+- Summarize this document.
+- Explain this error message.
+- Compare these two designs.
+- Extract action items from meeting notes.
+- Write an email.
+- Translate between languages.
+- Classify customer sentiment.
+- Generate SQL from natural language.
+- Decide which tool is appropriate based on a vague request.
+
+There is no single algorithm that can solve these perfectly.
+
+These problems require interpretation, judgment, or language understanding.
+
+This is where LLMs excel.
+
+---
+
+## The "If Statement" Test
+
+A surprisingly useful heuristic is this:
+
+> **Can I replace this with an `if` statement?**
+
+If the answer is yes, don't call the model.
+
+For example, imagine you're building a chatbot.
+
+Instead of asking:
+
+> "Is the user asking about the weather?"
+
+you might simply check for weather-related keywords or use a small intent
+classifier.
+
+Not every decision needs GPT.
+
+Save the model for the decisions that genuinely require reasoning.
+
+---
+
+## Are You Computing or Reasoning?
+
+Almost every task in an AI agent falls into one of two categories.
+
+### Computing
+
+Computing involves operations where there is one objectively correct answer.
+
+Examples include:
+
+- Mathematics
+- Filtering
+- Sorting
+- Parsing
+- Searching
+- Validation
+- Database queries
+- API calls
+- File operations
+
+Computers already solve these problems perfectly.
+
+Use code.
+
+### Reasoning
+
+Reasoning involves ambiguity.
+
+Examples include:
+
+- Planning
+- Explaining
+- Summarizing
+- Writing
+- Comparing alternatives
+- Interpreting requirements
+- Choosing between multiple valid options
+
+There isn't always one correct answer.
+
+Use the language model.
+
+---
+
+## The Reliability Test
+
+Ask yourself:
+
+> **Would I trust the model to perform this task ten thousand times without
+> making a mistake?**
+
+If the answer is no, don't delegate it to the model.
+
+Examples that should remain deterministic include:
+
+- Authentication
+- Authorization
+- Permission checks
+- Financial calculations
+- Tax computation
+- Signature verification
+- Cryptography
+- Security validation
+- Inventory counts
+
+Models are excellent at reasoning.
+
+They are not authoritative sources of truth.
+
+Always verify critical operations with code.
+
+---
+
+## The Cost Test
+
+Imagine your application processes one million requests per day.
+
+Would you rather spend milliseconds executing deterministic code or hundreds of
+milliseconds waiting for an LLM?
+
+Every unnecessary model call increases:
+
+- latency
+- cost
+- token usage
+- failure rate
+
+The fastest API call is the one you never make.
+
+---
+
+## The Architecture of a Real AI Agent
+
+One misconception is that an agent is simply a loop of prompts.
+
+In reality, modern agents alternate between reasoning and deterministic
+execution.
+
+Consider this user request:
+
+> "Find every Python file modified today, summarize the changes, and create a
+> Markdown report."
+
+A well-designed agent would look like this:
+
+1. The LLM understands the user's request.
+2. Code runs `git diff`.
+3. Code discovers the modified files.
+4. Code reads the file contents.
+5. The LLM summarizes the changes.
+6. Code writes the Markdown file.
+7. The LLM presents the final response.
+
+Notice something important.
+
+The model never executes Git commands.
+
+The model never reads directories.
+
+The model never writes files directly.
+
+Those responsibilities belong to deterministic tools.
+
+The model interprets information.
+
+The code performs actions.
+
+---
+
+## The Brain and the Hands
+
+A useful analogy is to think of an AI agent as a person.
+
+The language model is the **brain**.
+
+It plans.
+
+It reasons.
+
+It understands language.
+
+It decides what should happen next.
+
+The code is the **hands**.
+
+It executes commands.
+
+It moves files.
+
+It queries databases.
+
+It calls APIs.
+
+It performs calculations.
+
+A brain without hands cannot act.
+
+Hands without a brain cannot adapt.
+
+Great agents combine both.
+
+---
+
+## The 80/20 Rule of Agent Engineering
+
+Many beginners build agents where every step calls the language model.
+
+Experienced engineers usually build the opposite.
+
+Approximately:
+
+- **80-90% deterministic code**
+- **10-20% LLM reasoning**
+
+The code handles:
+
+- data retrieval
+- API communication
+- validation
+- retries
+- caching
+- authentication
+- file management
+- calculations
+- logging
+- error handling
+
+The LLM handles:
+
+- understanding intent
+- planning
+- interpretation
+- summarization
+- explanation
+- communication
+
+Ironically, the smartest agents often make fewer model calls than beginners
+expect.
+
+---
+
+## A Practical Decision Framework
+
+Whenever you're implementing a step in an AI agent, walk through this mental
+checklist.
+
+### 1. Can an algorithm solve this exactly?
+
+If yes, write code.
+
+---
+
+### 2. Does the task involve language or ambiguity?
+
+If yes, call the model.
+
+---
+
+### 3. Does it require interacting with external systems?
+
+Use deterministic tools.
+
+Examples include:
+
+- file systems
+- databases
+- REST APIs
+- Git
+- browsers
+- terminals
+
+The model should request the action.
+
+The tool should perform the action.
+
+---
+
+### 4. Is the result safety-critical?
+
+Never rely solely on the model.
+
+Always verify with deterministic logic.
+
+---
+
+## The Biggest Mistake Beginners Make
+
+New developers often think:
+
+> "I have GPT. I'll just ask it to do everything."
+
+The result is usually an agent that is:
+
+- slower
+- more expensive
+- harder to debug
+- less reliable
+- more prone to hallucinations
+
+Instead, think like a software engineer.
+
+Use the language model where intelligence is required.
+
+Use traditional software everywhere else.
+
+Your agent becomes dramatically faster, cheaper, and easier to maintain.
+
+---
+
+## Final Thoughts
+
+AI agents are not replacing software engineering -- they are expanding it.
+
+The language model is a powerful reasoning engine, but it is only one component
+of a complete system. The real craft of agent engineering lies in designing the
+boundary between probabilistic reasoning and deterministic execution.
+
+When faced with a new task, ask yourself:
+
+> **Can software solve this exactly?**
+
+If yes, write code.
+
+If not, let the model reason.
+
+The best agents don't use the LLM for everything.
+
+They use it only where human-like reasoning provides real value.
+
+And that's what makes them feel intelligent.
