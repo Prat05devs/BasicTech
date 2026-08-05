@@ -113,6 +113,14 @@ export const UniunFeature: React.FC = () => {
             Download on the App Store
           </a>
           <a
+            href="https://play.google.com/store/apps/details?id=in.uniun.app&hl=en_IN"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-blue hover:text-blue-700 px-5 py-2.5 border border-brand-blue/30 hover:border-brand-blue rounded-full transition-colors"
+          >
+            Get it on Google Play
+          </a>
+          <a
             href="https://github.com/basictech01/uniun"
             target="_blank"
             rel="noopener noreferrer"

@@ -32,6 +32,10 @@ describe('Products', () => {
       'href',
       'https://apps.apple.com/in/app/uniun/id6778077321',
     )
+    expect(screen.getByRole('link', { name: /google play/i })).toHaveAttribute(
+      'href',
+      'https://play.google.com/store/apps/details?id=in.uniun.app&hl=en_IN',
+    )
   })
 
   it('carousel cycles through the three Uniun pillars', async () => {

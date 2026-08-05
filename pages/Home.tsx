@@ -3,7 +3,6 @@ import { Hero } from '../components/Hero';
 import { Philosophy } from '../components/Philosophy';
 import { Services } from '../components/Services';
 import { Differentiation } from '../components/Differentiation';
-import { TestimonialsSection } from '../components/TestimonialsSection';
 import { Process } from '../components/Process';
 import { AISection } from '../components/AISection';
 import { TechStack } from '../components/TechStack';
@@ -23,7 +22,6 @@ const Home: React.FC = () => {
       <Philosophy />
       <Services />
       <Differentiation />
-      <TestimonialsSection />
       <Process />
       <AISection />
       <TechStack />
